@@ -1,0 +1,26 @@
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+    &lt;html lang="pt-BR"&gt;
+    &lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title>Visualização 3D com RA&lt;/title&gt;
+    &lt;script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"&gt;&lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+    &lt;h1&gt;Veja este modelo 3D em Realidade Aumentada!&lt;/h1&gt;
+    
+    &lt;model-viewer
+    src="modelos/meu_modelo.glb" &lt;!-- Certifique-se que o caminho está correto --&gt;
+    alt="Um modelo de um produto"
+    ar
+    ar-modes="webxr scene-viewer quick-look"
+    camera-controls
+    auto-rotate
+    shadow-intensity="0.7"&gt;
+    &lt;/model-viewer&gt;
+    
+    &lt;p&gt;Toque no botão abaixo para visualizar o modelo no seu ambiente.&lt;/p&gt;
+    
+    &lt;/body&gt;
+    &lt;/html&gt;
+    </code></pre>
