@@ -43,12 +43,13 @@
 </head>
 <body>
     <model-viewer
-        src="modelos/meu_modelo.glb"
+        src="modelos/pistao.glb"
         ar
         ar-modes="webxr scene-viewer quick-look"
         camera-controls
         auto-rotate
         shadow-intensity="1"
+        autoplay ar ar-modes="webxr scene-viewer"
         alt="Modelo 3D em AR"
         onload="console.log('Modelo carregado com sucesso')"
         onerror="console.error('Erro ao carregar o modelo')">
