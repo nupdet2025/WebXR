@@ -58,27 +58,6 @@
       height: 80%;
       background-color: #f0f0f0;
     }
-    #error-message {
-      display: none;
-      color: red;
-      text-align: center;
-      margin-top: 10px;
-      font-size: 16px;
-    }
-    #ar-button {
-      display: none;
-      padding: 10px 20px;
-      font-size: 16px;
-      background-color: #1a73e8;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-    #ar-button:hover {
-      background-color: #135ab6;
-    }
   </style>
 </head>
 <body>
@@ -93,49 +72,26 @@
     camera-controls
     camera-orbit="45deg 55deg 2.5m"
   ></model-viewer>
-  <button id="ar-button">View in AR</button>
-  <div id="error-message"></div>
 
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
   <script>
     const modelViewer = document.querySelector('model-viewer');
-    const arButton = document.getElementById('ar-button');
-    const errorMessage = document.getElementById('error-message');
 
-    // Check WebXR support
+    // Check WebXR support to enable built-in AR button
     async function checkARSupport() {
       if (navigator.xr) {
         try {
           const isSupported = await navigator.xr.isSessionSupported('immersive-ar');
-          if (isSupported) {
-            arButton.style.display = 'block';
-            arButton.addEventListener('click', () => {
-              modelViewer.activateAR();
-            });
-          } else {
-            showError('AR is not supported on this device or browser. Ensure you are using Chrome (Android) or Safari (iOS) with ARCore/ARKit support.');
+          if (!isSupported) {
+            modelViewer.removeAttribute('ar');
           }
         } catch (error) {
-          showError('Error checking AR support: ' + error.message);
+          modelViewer.removeAttribute('ar');
         }
       } else {
-        showError('WebXR is not supported by this browser. Try using Chrome on Android or Safari on iOS.');
+        modelViewer.removeAttribute('ar');
       }
     }
-
-    // Display error message
-    function showError(message) {
-      errorMessage.textContent = message;
-      errorMessage.style.display = 'block';
-      arButton.style.display = 'none';
-    }
-
-    // Handle permission errors
-    modelViewer.addEventListener('ar-status', (event) => {
-      if (event.detail.status === 'failed') {
-        showError('Failed to start AR. Please grant camera permissions and try again.');
-      }
-    });
 
     // Initialize AR check
     checkARSupport();
